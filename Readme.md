@@ -1,0 +1,1 @@
+Nesse repositório estão meus exercícios de SQL.
