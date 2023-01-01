@@ -1,1 +1,1 @@
-Nesse repositório estão meus exercícios de SQL.
+Nesse repositório está meu progresso de aprendizagem com SQL.
