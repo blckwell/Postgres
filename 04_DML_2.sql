@@ -258,3 +258,42 @@ where salario > 1500 and codDepartamento in ('10', '30');
 select nome, dtContratacao 
 from funcionario
 where dtContratacao >= '1995-01-01';
+
+-- 11) EXIBA O NOME E O CARGO DE CADA FUNCIONARIO QUE NÃO POSSUA GERENTE
+
+select nome, cargo
+from funcionario
+where codGerente is null;
+
+-- 12) EXIBA OS NOMES DE TODOS OS FUNCIONARIOS QUE POSSUEM UM 'A'NA SEGUNDA LETRA DE SEUS NOMES
+
+select nome
+from funcionario
+where nome like '_A%';
+
+-- 13) EXIBA TODOS OS FUNCIONARIOS QUE POSSUEM DUAS LETRAS 'A' EM SEUS NOMES E ESTÃO NO DEPARTAMENTO 30 
+-- OU SEU GERENTE SEJA O 7529, ORDENADO PELO CODIGO DO DEPARTAMENTO DE FORMA DECRESCENTE
+
+update funcionario 
+set codGerente = 7529
+where nome IN ('MAKELELE', 'FERDINAND');
+
+select *
+from funcionario
+where nome like '%A%A%' and (codDepartamento = 30 or codGerente = 7529)
+order by nome desc;
+
+-- 14) PREMIE, AUMENTANDO O SALARIO EM 300 REAIS, DE TODOS OS FUNCIONARIOS QUE GANHAM MENOS
+-- DE 1700
+
+select nome, salario, salario + 300 as salario_reajustado_em_trezentos_reais
+from funcionario
+where salario < 1700;
+
+-- 15) DE UM AUMENTO DE 15 POR CENTO AOS FUNCIONARIOS DO DEPARTAMENTO 30
+
+select nome, salario, salario + ((salario*15)/100) as salario_reajustado_em_quinze_porCento
+from funcionario
+where codDepartamento = 30;
+
+
