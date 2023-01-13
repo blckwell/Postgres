@@ -128,5 +128,20 @@ from funcionario;
 -- 6) Para cada funcionário exiba o nome do mesmo e calcule o número de meses entre a hoje e a sua data de
 -- admissão. Ordene a consulta pelo número de meses. Arredonde para inteiro o número de meses.
 
-select nome, extract(month from dtContratacao) as numero_de_meses
+select nome, (current_date - dtContratacao)/30 as numero_de_meses
 from funcionario;
+
+-- 7) CRIE UMA CONSULTA QUE PRODUZA A SEGUINTE FRASE: O <NOMEFUNC> RECEBE R$ <SALARIO> MENSALMENTE, MAS DESEJA
+-- RECEBER <SALARIO * 4>. COLOQUE UM LABEL DE “SONHO” A COLUNA.
+
+select 'O ' || nome || ' RECEBE R$ ' || salario || ' MENSALMENTE, ' || ' MAS DESEJA RECEBER '
+	   || salario * 4 as sonho
+from funcionario;
+
+-- 8) Faça um select, que retorne o nome do funcionário com a primeira letra em maiúscula e o número de letras que o
+-- nome contem. Para todos os funcionários cujos os nomes começam com J ou M. Coloque em ordem decrescente
+-- pelo número de letras
+
+select upper(substr(nome, 1, 1)) || lower(substr(nome, 2)) as nome, length(nome) as tamanho_string 
+from funcionario
+where nome like 'M%'
