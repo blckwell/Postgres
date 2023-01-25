@@ -144,4 +144,31 @@ from funcionario;
 
 select upper(substr(nome, 1, 1)) || lower(substr(nome, 2)) as nome, length(nome) as tamanho_string 
 from funcionario
-where nome like 'M%'
+where nome like 'M%' or nome like 'N%'
+order by tamanho_string desc;
+
+-- 9) Exiba a admissão e o dia (segunda, terça, quarta, ...) em que o funcionário começou a trabalhar. Ordene pelo dia
+-- da semana.
+
+select nome, case when extract(dow from dtContratacao) = 1 then 'Segunda-feira'
+			 when extract(dow from dtContratacao) = 2 then 'Terca-feira'
+			 when extract(dow from dtContratacao) = 3 then 'Quarta-feira'
+			 when extract(dow from dtContratacao) = 4 then 'Quinta-feira'
+			 when extract(dow from dtContratacao) = 5 then 'Sexta-feira'
+			 when extract(dow from dtContratacao) = 6 then 'Sabado'
+			 when extract(dow from dtContratacao) = 7 then 'Domingo'
+			 else 'other'
+			 end
+from funcionario
+order by extract(dow from dtContratacao) asc;
+
+-- 10) Faça uma consulta pelo nome do aluno e o telefone, informando “Sem telefone”, para os alunos em que o telefone
+-- é null.
+
+update aluno
+set telefone = 333222444
+where nome IN ('ANGELO GAWLINSKI MARTINS','KAREN REDIESS MULLER SORIA','MARCELO SOARES BARROSO');
+
+select nome, telefone, telefone as sem_telefone
+from aluno
+
