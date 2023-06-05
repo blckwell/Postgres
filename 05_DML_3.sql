@@ -172,3 +172,12 @@ where nome IN ('ANGELO GAWLINSKI MARTINS','KAREN REDIESS MULLER SORIA','MARCELO 
 select nome, telefone, telefone as sem_telefone
 from aluno
 
+-- 11) Faça uma consulta que exiba o nome do funcionário e a quantia de salário através de asteriscos. Cada asterisco
+-- representa R$ 100,00. Coloque em ordem decrescente de salário.
+
+select nome, salario, 
+case when salario/100 < 2 then '*'
+	 when salario/100 = 2 then '**'		
+else 'other'
+end
+from funcionario
