@@ -210,6 +210,29 @@ select ROUND(Max(salario)) as Maior_Salario, ROUND(AVG(salario)) as Salario_Medi
 from funcionario
 
 -- 15) Selecione o número de funcionários totais e o número de funcionários que possuem gerentes.
-
-select COUNT(nome)
+select *
 from funcionario
+
+select COUNT(*) as numero_total_funcionarios, COUNT(*) as numero_funcionarios_com_gerente
+from funcionario
+where coddepartamento IS NULL
+
+-- 16) Crie uma consulta para exibir o maior salário, o salário médio, o menor salário e a soma de todos os salários para
+-- cada cargo dos funcionários. Coloque label nas colunas como Máximo, Médio, Menor e Soma.
+
+select MAX(salario) as Maior_Salario, AVG(salario) as Salario_Medio, MIN(salario) as Menor_Salario, SUM(salario) as Soma_salarios, cargo
+from funcionario
+GROUP BY cargo
+
+-- 18) Faça uma consulta que exiba o número do gerente e o menor pagamento salarial sob a supervisão deste gerente.
+
+select MIN(salario) as Menor_pagamento_salarial, codgerente
+from funcionario
+group by codgerente
+
+-- 19) Crie uma consulta que exiba o histórico do número de funcionários contratados por ano, mostrando apenas de
+-- 2005 em diante.
+
+select COUNT(*) as Numero_funcionarios_contradados_por_ano, dtcontratacao
+from funcionario
+group by extract('year' from dtcontratacao), dtcontratacao
