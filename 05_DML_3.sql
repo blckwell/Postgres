@@ -175,9 +175,41 @@ from aluno
 -- 11) Faça uma consulta que exiba o nome do funcionário e a quantia de salário através de asteriscos. Cada asterisco
 -- representa R$ 100,00. Coloque em ordem decrescente de salário.
 
+declare n numeric;
+
 select nome, salario, 
-case when salario/100 < 2 then '*'
-	 when salario/100 = 2 then '**'		
+while (salario % 100 != 0) loop
+	   n := salario/100;
+	   i := i + 1;
+	end loop;
+case when i = 1 then '*'
+	 when i = 2 then '**'		
 else 'other'
 end
+from funcionario;
+
+-- 12) Exiba o nome do aluno e a faixa de idade dele. De acordo com a seguinte especificação.
+-- 0-18 = Categoria A 19-30 = Categoria B 31-61 = Categoria C Maior 61 = Categoria D
+
+select nome, idade,
+case when idade = 0 or idade <= 18 then 'Categoria A'
+	 when idade = 19 or idade <= 30 then 'Categoria B'
+	 when idade = 31 or idade <= 61 then 'Categoria C'
+else 'Categoria D'
+end 
+from aluno;
+
+-- 13) Exiba o maior salário, o médio, o menor e a soma de todos os salários de todos os funcionários.
+
+select MAX(salario) as Maior_Salario, AVG(salario) as Salario_Medio, MIN(salario) as Salario_Minimo, SUM(salario) as Soma_Salarios
+from funcionario
+
+-- 14) Arredonde os resultados da consulta anterior para números inteiros.
+
+select ROUND(Max(salario)) as Maior_Salario, ROUND(AVG(salario)) as Salario_Medio, ROUND(MIN(salario)) as Salario_Minimo, ROUND(SUM(salario)) as Soma_Salarios
+from funcionario
+
+-- 15) Selecione o número de funcionários totais e o número de funcionários que possuem gerentes.
+
+select COUNT(nome)
 from funcionario
